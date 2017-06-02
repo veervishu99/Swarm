@@ -21,19 +21,10 @@ void setup()
 {
   delay(3000);
   
-  // We use Serial1 to interface with ESP8266 
-  // and use Serial to debugging
-  Serial.begin(9600);
-  Serial1.begin(115200);
-  wifi.begin(&Serial1, &Serial, PIN_RESET);
   
-  /* If your board has only 1 serial port
-   * or you didn't need to debugging, try this.
-   *
-   * Serial.begin(115200);
-   * wifi.begin(&Serial, PIN_RESET);
-   *
-   */
+   Serial.begin(115200);
+   wifi.begin(&Serial, PIN_RESET);
+  
   
   // Check that ESP8266 is available
   if(wifi.test()) 
