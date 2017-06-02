@@ -1,45 +1,49 @@
-/*
- *
- *	Make an Access Point
- *
- */
+#include <ESP8266WiFi.h>
 
-#include <ESP8266_TCP.h>
+#include <WiFiClient.h>
 
-// ESP8266 Class
-ESP8266_TCP wifi;
+#include <ESP8266WebServer.h>
 
-// Define SSID, Password and Channel that provide for Access Point
-#define ssid         "ESP_AP"
-#define pass         "123456789"
-#define channel      5
+const char *ssid = "test";
 
-// Connect this pin to CH_PD pin on ESP8266
-#define PIN_RESET    6	
+const char *password = "password";
 
-void setup()
-{
-  delay(3000);
-  
-  
-   Serial.begin(115200);
-   wifi.begin(&Serial, PIN_RESET);
-  
-  
-  // Check that ESP8266 is available
-  if(wifi.test()) 
-  {
-	// Open Access Point (WiFi Hotspot) 
-    wifi.openAccessPoint(ssid, pass, channel);
-  } 
-  else 
-  {
-	// ESP8266 isn't available
-    Serial.println("Check module connection and restart to try again..."); 
-  }
+ESP8266WebServer server(80);
+
+void handleRoot() {
+
+server.send(200, "text/html", "<h1>You are connected</h1>");
+
 }
 
-void loop()
-{
+void setup() {
+
+delay(1000);
+
+Serial.begin(115200);
+
+Serial.println();
+
+Serial.print("Configuring access point...");
+
+WiFi.softAP(ssid, password);
+
+IPAddress myIP = WiFi.softAPIP();
+
+Serial.print("AP IP address: ");
+
+Serial.println(myIP);
+
+server.on("/", handleRoot);
+
+server.begin();
+
+Serial.println("HTTP server started");
+
+}
+
+void loop() {
+
+server.handleClient();
 
 }
