@@ -1,0 +1,26 @@
+int val; 
+ int encoder0PinA = 3;
+ int encoder0PinB = 4;
+ int encoder0Pos = 0;
+ int encoder0PinALast = LOW;
+ int current = LOW;
+
+ void setup() { 
+   pinMode (encoder0PinA,INPUT);
+   pinMode (encoder0PinB,INPUT);
+   encoder0PinALast=digitalRead(encoder0PinA);
+   Serial.begin (9600);
+ } 
+
+ void loop() { 
+   current = digitalRead(encoder0PinA);
+   if ((encoder0PinALast == LOW) && (current == HIGH)) {
+     if (digitalRead(encoder0PinB) == LOW) {//this will check whether motor rotates to clockwise or counter clockwise 
+       encoder0Pos--;
+     } else {
+       encoder0Pos++;
+     }
+     Serial.println (encoder0Pos);
+   } 
+   encoder0PinALast = current;
+ } 
