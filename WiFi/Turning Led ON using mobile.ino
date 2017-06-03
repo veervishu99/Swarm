@@ -1,3 +1,9 @@
+*/
+Install a virtual wifi terminal on the mobile.
+Connect to SRB using password sourabhs.
+Use the IP : 192.168.4.1
+Port : 1337 */
+
 #include <ESP8266WiFi.h>
 
 const char* ssid = "SRB";
