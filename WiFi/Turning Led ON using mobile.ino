@@ -2,13 +2,14 @@
 Install a virtual wifi terminal on the mobile.
 Connect to SRB using password sourabhs.
 Use the IP : 192.168.4.1
-Port : 1337 */
+Port : 1337 
+The LED should be connected to GPIO2 of ESP*/
 
 #include <ESP8266WiFi.h>
 
 const char* ssid = "SRB";
 const char* password = "sourabhs";
-const int ledPin = 13;
+const int ledPin = 2;
 WiFiServer server(1337); //1337 is the port
 
 void printWiFiStatus();
