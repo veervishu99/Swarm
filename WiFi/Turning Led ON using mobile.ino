@@ -17,7 +17,7 @@ void setup(void) {
   Serial.begin(115200);
   WiFi.softAP(ssid, password);
 
-  // Configure GPIO2 as OUTPUT.
+ 
   pinMode(ledPin, OUTPUT);
 
   // Start TCP server.
